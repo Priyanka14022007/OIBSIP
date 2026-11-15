@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #eaf0f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background: #172b4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        h2 { color: #172b4d; }
+        #result { font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Temperature Converter</h2>
+    <p>Convert temperatures easily</p>
+
+    <input type="number" id="temp" placeholder="Enter temperature">
+
+    <select id="from">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+    </select>
+
+    <select id="to">
+        <option value="F">Fahrenheit</option>
+        <option value="C">Celsius</option>
+        <option value="K">Kelvin</option>
+    </select>
+
+    <button onclick="convert()">Convert</button>
+
+    <h3 id="result">Result will appear here</h3>
+</div>
+
+<script>
+function convert() {
+    let t = parseFloat(document.getElementById("temp").value);
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let c;
+
+    if (isNaN(t)) {
+        document.getElementById("result").innerHTML = "Enter a valid temperature";
+        return;
+    }
+
+    c = from == "C" ? t : from == "F" ? (t-32)*5/9 : t-273.15;
+
+    let result = to == "C" ? c : to == "F" ? (c*9/5)+32 : c+273.15;
+
+    document.getElementById("result").innerHTML =
+        result.toFixed(2) + " " + to;
+}
+</script>
+
+</body>
+</html>
